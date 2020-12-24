@@ -7,11 +7,20 @@ using namespace std;
 int main() 
 {
 	//srand(time(nullptr));
-	int n = 3;
+	int n = 2;
 	Graph a = Graph(n);
 	a.Output();
-	
+	Graph b = a;
 
+
+	cout << "Expended" << endl;
+	Graph exp = a.Expand(10);
+	exp.Output();
+
+	bool test = exp.SearchIsomorphicSubgraph(a);
+
+	cout << "Result:"<< test;
+	
 	
 	
 	return 0;

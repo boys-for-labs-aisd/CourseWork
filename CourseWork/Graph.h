@@ -16,10 +16,11 @@ public:
 	void Output();
 	Graph Expand(int expandNumber);
 
-	void SearchIsomorphicSubgraph(Graph subgraph);
+	bool SearchIsomorphicSubgraph(Graph subgraph);
 	bool isEqual(Graph subgraph);
-
 	Graph GetReplacedRowCol(int indexV1, int indexV2);
+	Graph GetSubgraph(int index, int size);
+
 };
 
 class Vertex{

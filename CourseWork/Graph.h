@@ -9,10 +9,10 @@ private:
 	std::vector<Vertex*> Vertexs;
 	int numVertexs;
 public:
-	
-
+	Graph(int countVertex, char zero);
 	Graph(int countVertex);
 	void Output();
+	Graph Expand(int expandNumber);
 };
 
 class Vertex{
@@ -22,6 +22,6 @@ private:
 public:
 	std::vector<int> AdjacentVert;
 
-	Vertex();
+	Vertex(int Degree, char zero);
 	Vertex(int Degree);
 };

@@ -17,9 +17,9 @@ int main()
 	Graph exp = a.Expand(10);
 	exp.Output();
 
-	bool test = exp.SearchIsomorphicSubgraph(a);
+	Graph test = exp.SearchIsomorphicSubgraph(a);
 
-	cout << "Result:"<< test;
+	test.Output();
 	
 	
 	

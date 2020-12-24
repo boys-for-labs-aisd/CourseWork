@@ -95,10 +95,12 @@ Graph Graph::Expand(int expandNumber)
 	return temp;
 }
 
-bool Graph::SearchIsomorphicSubgraph(Graph subgraph)
+Graph Graph::SearchIsomorphicSubgraph(Graph subgraph)
 {
 	int rangeSearch = numVertexs - subgraph.NumVertexs();	
 	bool res = false;
+	Graph result = Graph(subgraph.NumVertexs(), ' ');
+
 	for (int i = 0; i <= rangeSearch && !res; i++)
 	{
 		Graph sub = this->GetSubgraph(i, subgraph.NumVertexs());
@@ -113,15 +115,18 @@ bool Graph::SearchIsomorphicSubgraph(Graph subgraph)
 				Graph replaced = sub.GetReplacedRowCol(j, k);
 				//std::cout << "Replaced" << '\n';
 				//replaced.Output();
-
 				res = replaced.isEqual(subgraph);
 				
 			}
 		}
+		if (res)
+		{
+			result = sub.Copy();
+		}
 
 	}
 
-	return res;
+	return result;
 }
 
 
@@ -148,19 +153,8 @@ bool Graph::isEqual(Graph subgraph)
 
 Graph Graph::GetReplacedRowCol(int indexV1, int indexV2)
 {
-	Graph res = Graph(numVertexs, 'z');
+	Graph res = this->Copy();
 	
-	for (int i = 0; i < numVertexs; i++)
-	{
-		Vertex* vRes = res.Vertexs[i];
-		Vertex* v = Vertexs[i];
-		for (int j = 0; j < numVertexs; j++)
-		{
-			
-			vRes->AdjacentVert[j] = v->AdjacentVert[j];
-
-		}
-	}
 	
 	std::swap(res.Vertexs[indexV1], res.Vertexs[indexV2]);
 
@@ -193,5 +187,22 @@ Graph Graph::GetSubgraph(int index, int size)
 	}
 	
 	return sub;
+}
+
+Graph Graph::Copy()
+{
+	Graph copied = Graph(numVertexs, 'z');
+	for (int i = 0; i < numVertexs; i++)
+	{
+		Vertex* vC = copied.Vertexs[i];
+		Vertex* v = Vertexs[i];
+		for (int j = 0; j < numVertexs; j++)
+		{
+
+			vC->AdjacentVert[j] = v->AdjacentVert[j];
+
+		}
+	}
+	return copied;
 }
 
